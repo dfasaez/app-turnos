@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="login-container">
+
+    <img src="{{ url_for('static', filename='logo.png') }}" class="login-logo">
+
+    <h2>Ingreso Plataforma</h2>
+    <p>Web creada para integrar información de turnos de los colaboradores</p>
+
+    <form method="POST">
+        <input type="email" name="email" placeholder="Correo corporativo" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Ingresar</button>
+    </form>
+
+</div>
+
+{% endblock %}

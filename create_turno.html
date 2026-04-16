@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Crear Turno Empresa</h2>
+
+<a href="/dashboard" class="btn">⬅ Volver al inicio</a>
+
+<form method="POST">
+
+    <input name="nombre" placeholder="Nombre turno" required>
+    <input name="tipo" placeholder="Tipo jornada" required>
+    <input name="colacion" placeholder="Colación">
+
+    <h3>Seleccionar días de trabajo</h3>
+
+    {% for dia in ["lunes","martes","miercoles","jueves","viernes","sabado","domingo"] %}
+        <div style="margin-bottom:10px; border-bottom:1px solid #ccc; padding:10px;">
+            
+            <label>
+                <input type="checkbox" name="dias" value="{{dia}}" onchange="toggleInputs('{{dia}}')">
+                {{ dia.capitalize() }}
+            </label>
+
+            <div id="{{dia}}_inputs" style="display:none; margin-top:5px;">
+                <input type="time" name="{{dia}}_inicio">
+                <input type="time" name="{{dia}}_fin">
+            </div>
+
+        </div>
+    {% endfor %}
+
+    <button>Guardar Turno</button>
+</form>
+
+<script>
+function toggleInputs(dia) {
+    let div = document.getElementById(dia + "_inputs");
+    div.style.display = (div.style.display === "none") ? "block" : "none";
+}
+</script>
+
+{% endblock %}

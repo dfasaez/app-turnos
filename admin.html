@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="/dashboard" class="btn">⬅ Volver al inicio</a>
+
+<h2>Panel Administrador RRHH</h2>
+
+<!-- ========================= -->
+<!-- CREAR USUARIO -->
+<!-- ========================= -->
+<h3>Crear Usuario</h3>
+
+<form method="POST">
+    <input name="nombre" placeholder="Nombre" required>
+    <input name="email" placeholder="Email" required>
+    <input name="password" placeholder="Password" required>
+
+    <select name="rol">
+        <option value="admin">Admin</option>
+        <option value="jefatura">Jefatura</option>
+        <option value="usuario">Usuario</option>
+    </select>
+
+    <button type="submit">Crear</button>
+</form>
+
+<hr>
+
+<h3>Usuarios creados</h3>
+<ul>
+    {% for u in usuarios %}
+        <li>{{ u.nombre }} - {{ u.rol }}</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<!-- ========================= -->
+<!-- CREAR TURNO -->
+<!-- ========================= -->
+<h3>Crear Turno</h3>
+
+<form action="/crear_turno" method="POST">
+    <input name="nombre" placeholder="Nombre turno" required>
+    <input name="tipo" placeholder="Tipo jornada" required>
+    <input type="time" name="inicio" required>
+    <input type="time" name="fin" required>
+    <input name="colacion" placeholder="Colación">
+    <button>Crear turno</button>
+</form>
+
+<hr>
+
+<h3>Turnos creados</h3>
+<ul>
+    {% for t in turnos %}
+        <li>{{ t.nombre }} ({{ t.hora_inicio }} - {{ t.hora_fin }})</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<!-- ========================= -->
+<!-- CREAR TRABAJADOR -->
+<!-- ========================= -->
+<h3>Crear Trabajador</h3>
+
+<form method="POST" action="/crear_trabajador">
+    <input name="nombre" placeholder="Nombre" required>
+    <input name="area" placeholder="Área" required>
+    <input name="cargo" placeholder="Cargo" required>
+    <button type="submit">Crear Trabajador</button>
+</form>
+
+<hr>
+
+<h3>Trabajadores creados</h3>
+<ul>
+    {% for t in trabajadores %}
+        <li>{{ t.nombre }} - {{ t.area }} ({{ t.cargo }})</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

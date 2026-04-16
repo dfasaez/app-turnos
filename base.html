@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de Turnos</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f6f8;
+        }
+
+        .navbar {
+            background: #1b5e20;
+            padding: 15px;
+            color: white;
+        }
+
+        .navbar a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            background: #2e7d32;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-danger {
+            background: #c62828;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #1b5e20;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .turno-mañana {
+            background: #c8e6c9;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .turno-tarde {
+            background: #ffe0b2;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .turno-noche {
+            background: #bbdefb;
+            border-radius: 5px;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <a href="/dashboard">🏠 Inicio</a>
+    <a href="/admin">⚙️ Administración</a>
+    <a href="/asignar_turno">📅 Asignar</a>
+    <a href="/calendario">📊 Calendario</a>
+    <a href="/logout">🚪 Salir</a>
+</div>
+
+<div class="container">
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div style="padding:10px; margin-bottom:10px;
+                background:{% if category=='error' %}#ffcdd2{% else %}#c8e6c9{% endif %};">
+        {{ message }}
+    </div>
+  {% endfor %}
+{% endwith %}
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

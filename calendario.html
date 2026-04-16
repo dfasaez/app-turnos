@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+
+<h2>📅 Calendario de Turnos</h2>
+
+<a href="/exportar_excel" class="btn">📥 Exportar a Excel</a>
+
+<table>
+
+    <tr>
+        <th>Trabajador</th>
+        <th>Lun</th>
+        <th>Mar</th>
+        <th>Mié</th>
+        <th>Jue</th>
+        <th>Vie</th>
+        <th>Sáb</th>
+        <th>Dom</th>
+    </tr>
+
+    {% for t in calendario.values() %}
+    <tr>
+
+        <td style="font-weight:bold;">{{ t.nombre }}</td>
+
+        {% for dia in t.dias.values() %}
+
+        <td>
+
+            {% if dia %}
+
+                {% if "07:00" in dia %}
+                    <div class="turno-mañana">{{ dia }}</div>
+                {% elif "14:" in dia %}
+                    <div class="turno-tarde">{{ dia }}</div>
+                {% else %}
+                    <div class="turno-noche">{{ dia }}</div>
+                {% endif %}
+
+            {% else %}
+                -
+            {% endif %}
+
+        </td>
+
+        {% endfor %}
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

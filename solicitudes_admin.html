@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Gestión de Solicitudes</h2>
+
+    <table class="tabla">
+        <tr>
+            <th>Colaborador</th>
+            <th>Turno</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Estado</th>
+            <th>Acción</th>
+        </tr>
+
+        {% for s in solicitudes %}
+        <tr>
+            <td>{{ s.user.nombre }}</td>
+            <td>{{ s.turno.nombre }}</td>
+            <td>{{ s.fecha_inicio }}</td>
+            <td>{{ s.fecha_fin }}</td>
+            <td>
+                <span class="estado {{ s.estado }}">
+                    {{ s.estado }}
+                </span>
+            </td>
+            <td>
+                {% if s.estado == "Pendiente" %}
+                    <a href="/aprobar/{{ s.id }}" class="btn aprobar">Aprobar</a>
+                    <a href="/rechazar/{{ s.id }}" class="btn rechazar">Rechazar</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
